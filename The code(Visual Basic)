@@ -1,0 +1,220 @@
+Private Sub Ekranı_Temizle_Click()
+Sayfa1.Cells.ClearContents
+Sayfa1.Cells.ClearFormats
+
+Range("A1").Value = "Lokasyon Adı"
+Range("B1").Value = "UstGrup"
+Range("C1").Value = "LokasyonBarkod"
+Range("D1").Value = "LokasyonStok"
+Range("E1").Value = "Depo"
+Range("F1").Value = "Reyon"
+Range("G1").Value = "Ürün Barkod"
+Range("H1").Value = "Depodaki Lokasyonlar"
+Range("I1").Value = "Lokasyon Adı1"
+Range("j1").Value = "LokasyonBarkod1"
+
+MsgBox ("İşlem Tamamlandı")
+
+End Sub
+
+Private Sub Problemi_Lokasyonlar_Click()
+Sayfa4.Cells.ClearContents
+Sayfa4.Cells.ClearFormats
+Sayfa4.Range("A1").Value = "Ürün Barkod"
+Sayfa4.Range("B1").Value = "L.Stok-Depo"
+Sayfa4.Range("C1").Value = "Lokasyon Stok"
+Sayfa4.Range("D1").Value = "Depo"
+Sayfa4.Range("E1").Value = "Reyon"
+Sayfa4.Range("F1").Value = "Lokasyon Adı"
+Dim i As Variant
+Dim j As Variant
+i = 2
+j = 2
+k = 2
+Do While (Cells(i, 4) > 0)
+    If (Cells(i, 4) > Cells(i, 5)) Then
+        Sayfa4.Cells(j, 1) = Cells(i, 7)
+        Sayfa4.Cells(j, 3) = Cells(i, 4)
+        Sayfa4.Cells(j, 4) = Cells(i, 5)
+        
+        Sayfa4.Cells(j, 2) = Cells(i, 4) - Cells(i, 5)
+            If (Sayfa4.Cells(j, 2) > 0) Then
+                Sayfa4.Cells(j, 2).Interior.Color = RGB(242, 72, 85)
+                Else
+            End If
+            
+        Sayfa4.Cells(j, 5) = Cells(i, 6)
+            If (Sayfa4.Cells(j, 5) < 0) Then
+                Sayfa4.Cells(j, 5).Interior.Color = RGB(222, 54, 97)
+                Else
+            End If
+        
+        Sayfa4.Cells(j, 6) = Cells(i, 1) + Cells(i, 2)
+        j = j + 1
+        i = i + 1
+    ElseIf (Cells(i, 6) < 0) Then
+        Sayfa4.Cells(j, 1) = Cells(i, 7)
+        Sayfa4.Cells(j, 3) = Cells(i, 4)
+        Sayfa4.Cells(j, 4) = Cells(i, 5)
+        Sayfa4.Cells(j, 2) = Cells(i, 4) - Cells(i, 5)
+            If (Sayfa4.Cells(j, 2) > 0) Then
+                Sayfa4.Cells(j, 2).Interior.Color = RGB(242, 72, 85)
+                Else
+            End If
+        
+        Sayfa4.Cells(j, 5) = Cells(i, 6)
+            If (Sayfa4.Cells(j, 5) < 0) Then
+                Sayfa4.Cells(j, 5).Interior.Color = RGB(222, 54, 97)
+                Else
+            End If
+       
+       Sayfa4.Cells(j, 6) = Cells(i, 1) + Cells(i, 2)
+        j = j + 1
+        i = i + 1
+    Else
+        i = i + 1
+    End If
+Loop
+
+    If (Sayfa4.Cells(2, 1) = 0) Then
+        MsgBox ("Problemli lokasyonunuz bulunmamaktadır!")
+    ElseIf (Sayfa4.Cells(3, 1) = 0) Then
+        MsgBox ("Problemli lokasyonunuzu görebilmek için sayfa 4'e bakınız!")
+    Else
+        MsgBox ("Problemli lokasyonlarınızı görebilmek için sayfa 4'e bakınız!")
+    End If
+
+End Sub
+
+Private Sub Reyon_Kolileri_Click()
+Sayfa3.Cells.ClearContents
+Sayfa3.Cells.ClearFormats
+Sayfa3.Range("A1").Value = "Reyon Kolileri"
+Sayfa3.Range("B1").Value = "Sıra"
+Dim i, j, k, l, m, n, o, ö, p As Variant
+i = 2
+j = 2
+k = 2
+m = 2
+n = 2
+o = 2
+ö = 2
+
+    Cells(o, 10) = Cells(ö, 3)
+    
+    Cells(o, 9) = Cells(ö, 1) + Cells(ö, 2)
+Do While (Cells(ö, 3) > 0)
+    If (Cells(ö, 3) = Cells(ö + 1, 3)) Then
+        ö = ö + 1
+    Else
+        o = o + 1
+        Cells(o, 10) = Cells(ö + 1, 3)
+        Cells(o, 9) = Cells(ö + 1, 1) + Cells(ö + 1, 2)
+        ö = ö + 1
+    End If
+Loop
+    p = Range("C2").Value
+Do While (Cells(m, 8) > 0)
+    Cells(m, 8) = Right(Cells(m, 8), Len(p))
+    m = m + 1
+Loop
+
+Do While (Cells(n, 10) > 0)
+    Cells(n, 10) = Cells(n, 10) * 1
+    n = n + 1
+Loop
+
+Do While (Cells(j, 8) > 0)
+    If (Cells(j, 8) = Cells(i, 10)) Then
+        j = j + 1
+        i = 2
+    Else
+        Do While (Cells(i + 1, 10) = 0)
+            Sayfa3.Cells(k, 1) = Cells(j, 8)
+            Sayfa3.Cells(k, 2) = j - 1
+            Sayfa3.Cells(k, 1).Interior.Color = RGB(232, 226, 115)
+            Sayfa3.Cells(k, 2).Interior.Color = RGB(232, 226, 115)
+            
+            k = k + 1
+            j = j + 1
+            i = 1
+            Exit Do
+        Loop
+        i = i + 1
+    End If
+Loop
+
+If (Sayfa3.Cells(2, 1) = 0) Then
+        MsgBox ("Reyon koliniz bulunmamaktadır!")
+    ElseIf (Sayfa3.Cells(3, 1) = 0) Then
+        MsgBox ("Reyon kolinizi görebilmek için sayfa 3'ye bakınız!")
+    Else
+        MsgBox ("Reyon kolilerinizi görebilmek için sayfa 3'ye bakınız!")
+    End If
+
+End Sub
+
+Private Sub Reyona_Atılacak_Lokasyonlar_Click()
+Sayfa2.Cells.ClearContents
+Sayfa2.Cells.ClearFormats
+Sayfa2.Range("A1").Value = "Reyona Atılacak Lokasyonlar"
+Dim i, j, k, m, n, o, ö, p As Variant
+i = 2
+j = 2
+k = 2
+m = 2
+n = 2
+o = 2
+ö = 2
+    
+    Cells(o, 10) = Cells(ö, 3)
+    Cells(o, 9) = Cells(ö, 1) + Cells(ö, 2)
+
+Do While (Cells(ö, 3) > 0)
+    If (Cells(ö, 3) = Cells(ö + 1, 3)) Then
+        ö = ö + 1
+    Else
+        o = o + 1
+        Cells(o, 10) = Cells(ö + 1, 3)
+        Cells(o, 9) = Cells(ö + 1, 1) + Cells(ö + 1, 2)
+        ö = ö + 1
+    End If
+Loop
+    p = Range("C2").Value
+Do While (Cells(m, 8) > 0)
+    Cells(m, 8) = Right(Cells(m, 8), Len(p))
+    m = m + 1
+Loop
+
+Do While (Cells(n, 10) > 0)
+    Cells(n, 10) = Cells(n, 10) * 1
+    n = n + 1
+Loop
+
+Do While (Cells(i, 10) > 0)
+    If (Cells(i, 10) = Cells(j, 8)) Then
+        i = i + 1
+        j = 2
+    Else
+        Do While (Cells(j + 1, 8) = 0)
+            Sayfa2.Cells(k, 1) = Cells(i, 9)
+            Sayfa2.Cells(k, 1).Interior.Color = RGB(98, 196, 217)
+            
+            k = k + 1
+            i = i + 1
+            j = 1
+            Exit Do
+        Loop
+        j = j + 1
+    End If
+Loop
+    
+    If (Sayfa2.Cells(2, 1) = 0) Then
+        MsgBox ("Reyona atılacak lokasyon bulunmamaktadır!")
+    ElseIf (Sayfa2.Cells(3, 1) = 0) Then
+        MsgBox ("Reyona atılacak lokasyonu görebilmek için sayfa 2'ye bakınız!")
+    Else
+        MsgBox ("Reyona atılacak lokasyonları görebilmek için sayfa 2'ye bakınız!")
+    End If
+
+End Sub
